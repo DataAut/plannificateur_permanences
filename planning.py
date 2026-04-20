@@ -118,7 +118,8 @@ if st.button("Générer le Planning"):
     for schedule in all_schedules:
         date = schedule['Date'].iloc[0]
         st.subheader(date)
-        styled_schedule = schedule.style.applymap(highlight_status, subset=team_members)
+        member_cols = [m for m in team_members if m in schedule.columns]
+        styled_schedule = schedule.style.applymap(highlight_status, subset=member_cols)
         st.dataframe(styled_schedule)
 
     # Afficher le compteur
